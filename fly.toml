@@ -1,5 +1,5 @@
-app = "bybit-trading-bot"
-primary_region = "fra"
+app = "bybit-trading-bot" # تأكد من مطابقة اسم التطبيق في حسابك
+primary_region = "ams"    # أو fra حسب المنطقة التي اخترتها
 
 [build]
   dockerfile = "Dockerfile"
@@ -11,7 +11,7 @@ primary_region = "fra"
   DATA_ROOT = "/data"
   BYBIT_TESTNET = "true"
 
-[mounts]
+[[mounts]]
   source = "bybit_data"
   destination = "/data"
 
@@ -29,6 +29,7 @@ primary_region = "fra"
   auto_stop_machines = false
   auto_start_machines = false
   min_machines_running = 1
+
   [[http_service.checks]]
     grace_period = "120s"
     interval = "30s"
