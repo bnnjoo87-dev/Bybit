@@ -1,36 +1,23 @@
-app = "bybit-trading-bot"
-primary_region = "fra"
+# fly.toml app configuration file generated for binancetrading on 2026-10-25T05:14:12Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'binancetrading'
+primary_region = 'cdg'
 
 [build]
-dockerfile = "Dockerfile"
-
-[env]
-PORT = "8080"
-LOG_LEVEL = "INFO"
-POLL_INTERVAL_SEC = "5"
-DATA_ROOT = "/data"
-BYBIT_TESTNET = "true"
-
-[mounts]
-source = "bybit_data"
-destination = "/data"
-
-[[vm]]
-memory = "1gb"
-cpu_kind = "shared"
-cpus = 1
 
 [http_service]
-internal_port = 8080
-force_https = false
-auto_stop_machines = false
-auto_start_machines = false
-min_machines_running = 1
-processes = ["app"]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ['app']
 
-[[http_service.checks]]
-grace_period = "120s"
-interval = "30s"
-method = "GET"
-path = "/"
-timeout = "5s"
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
+  memory_mb = 1024
