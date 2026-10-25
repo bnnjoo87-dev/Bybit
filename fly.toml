@@ -2,35 +2,35 @@ app = "bybit-trading-bot"
 primary_region = "fra"
 
 [build]
-  dockerfile = "Dockerfile"
+dockerfile = "Dockerfile"
 
 [env]
-  PORT = "8080"
-  LOG_LEVEL = "INFO"
-  POLL_INTERVAL_SEC = "5"
-  DATA_ROOT = "/data"
-  BYBIT_TESTNET = "true"
+PORT = "8080"
+LOG_LEVEL = "INFO"
+POLL_INTERVAL_SEC = "5"
+DATA_ROOT = "/data"
+BYBIT_TESTNET = "true"
 
 [mounts]
-  source = "bybit_data"
-  destination = "/data"
+source = "bybit_data"
+destination = "/data"
 
 [[vm]]
-  memory = "1gb"
-  cpu_kind = "shared"
-  cpus = 1
-
-
+memory = "1gb"
+cpu_kind = "shared"
+cpus = 1
 
 [http_service]
-  internal_port = 8080
-  force_https = false
-  auto_stop_machines = false
-  auto_start_machines = false
-  min_machines_running = 1
-  [[http_service.checks]]
-    grace_period = "120s"
-    interval = "30s"
-    method = "GET"
-    path = "/"
-    timeout = "5s"
+internal_port = 8080
+force_https = false
+auto_stop_machines = false
+auto_start_machines = false
+min_machines_running = 1
+processes = ["app"]
+
+[[http_service.checks]]
+grace_period = "120s"
+interval = "30s"
+method = "GET"
+path = "/"
+timeout = "5s"
